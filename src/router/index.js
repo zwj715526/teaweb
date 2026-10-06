@@ -5,24 +5,34 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/layout/layout.vue'),
+      component: () => import('@/views/layout/layoutPage.vue'),
+      redirect: '/point/pointchannel',
       children: [
-        // 子路由path不加 /（以下user页面尚未创建，创建后取消注释）
-        // {
-        //   path: 'user/userName',
-        //   name: 'userName',
-        //   component: () => import('@/views/user/userName.vue'),
-        // },
-        // {
-        //   path: 'user/userPassword',
-        //   name: 'userPassword',
-        //   component: () => import('@/views/user/userPassword.vue'),
-        // },
-        // {
-        //   path: 'user/userAvatar',
-        //   name: 'userAvatar',
-        //   component: () => import('@/views/user/userAvatar.vue'),
-        // },
+        {
+          path: '/point/pointchannel',
+          name: 'pointchannel',
+          component: () => import('@/views/point/PointChannel.vue'),
+        },
+        {
+          path: '/point/pointmanage',
+          name: 'pointmanage',
+          component: () => import('@/views/point/PointManage.vue'),
+        },
+        {
+          path: '/user/useravatar',
+          name: 'useravatar',
+          component: () => import('@/views/user/UserAvatar.vue'),
+        },
+        {
+          path: '/user/userpassword',
+          name: 'userpassword',
+          component: () => import('@/views/user/UserPassword.vue'),
+        },
+        {
+          path: '/user/userprofile',
+          name: 'userprofile',
+          component: () => import('@/views/user/UserProfile.vue'),
+        },
       ],
     },
     {

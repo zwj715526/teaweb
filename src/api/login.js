@@ -35,6 +35,6 @@ export const updateUserInfo = (username, password, avatar) => {
 //删除用户
 export const deleteUser = (username) => {
   return request.delete('/api/delete', {
-    name: username,
+    data: { name: username },
   })
 }

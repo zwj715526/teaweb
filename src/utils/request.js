@@ -1,4 +1,4 @@
-import { useUserStore } from '@/stores/user.js'
+import { useUserStore } from '@/stores/token.js'
 import axios from 'axios'
 import router from '@/router'
 import { ElMessage } from 'element-plus'

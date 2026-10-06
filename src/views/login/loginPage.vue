@@ -5,7 +5,8 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { register, login } from '@/api/login.js'
 import { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css'
-import { useUserStore } from '@/stores/user.js'
+import { useUserStore } from '@/stores/token.js'
+import { UserStore } from '@/stores/user.js'
 import { useRouter } from 'vue-router'
 const isRegister = ref(false)
 const loginFormRef = ref()
@@ -27,6 +28,7 @@ const preregisterRules = async () => {
   }
 }
 const useStore = useUserStore()
+const userStore = UserStore()
 const router = useRouter()
 const preloginRules = async () => {
   await loginFormRef.value.validate()
@@ -34,7 +36,11 @@ const preloginRules = async () => {
     const res = await login(formModel.value.username, formModel.value.password)
     ElMessage.success(res.data.message || '登录成功')
     useStore.setToken(res.data.token)
+    useStore.setUsername(res.data.name || formModel.value.username)
+    userStore.setUser(res.data.name || formModel.value.username, formModel.value.password, '')
+    console.log('跳转前token：', useStore.token)
     router.push('/')
+    console.log('执行了router.push')
   } catch (e) {
     // 错误提示已由 request 拦截器统一弹出
     console.log(e)
